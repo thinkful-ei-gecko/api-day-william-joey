@@ -60,18 +60,22 @@ const shoppingList = (function(){
     // insert that HTML into the DOM
     $('.js-shopping-list').html(shoppingListItemsString);
   }
-  
-  
+
+
   function handleNewItemSubmit() {
     $('#js-shopping-list-form').submit(function (event) {
       event.preventDefault();
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
-      api.createItem(newItemName) // => POSTING new item to API
-        .then(res => res.json()) // => RECEIVE or GETs "posted" item from API
+      let error;
+      api.createItem(newItemName) 
+        .then(res => res.json()) // POSTING item to API
         .then((item) => {
           store.addItem(item);
           render();
+        })
+        .catch(err => {
+          store.setError(err.message);
         });
     });
   }
@@ -86,12 +90,15 @@ const shoppingList = (function(){
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
       const id = getItemIdFromElement(event.currentTarget);
       //store.findAndToggleChecked(id);
-      api.updateItem(id, {checked: true})
+      api.updateItem(id, {checked: !id.checked})
         .then(response => {
           if(response.ok){
-            store.findAndUpdate(id, {checked: true});
+            store.findAndUpdate(id, {checked: !id.checked});
             render();
           }
+        })
+        .catch(err => {
+          store.setError(err.message);
         });
     });
   }
@@ -108,6 +115,9 @@ const shoppingList = (function(){
             store.findAndDelete(id);
             render();
           }
+        })
+        .catch(err => {
+          store.setError(err.message);
         });
     });
   }
@@ -125,8 +135,10 @@ const shoppingList = (function(){
             store.findAndUpdate(id, {name: itemName});
             render();
           }
+        })
+        .catch(err => { 
+          store.setError(err.message);
         });
-    
     });
   }
   

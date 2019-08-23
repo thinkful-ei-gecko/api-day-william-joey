@@ -47,10 +47,16 @@ const store = (function(){
     this.searchTerm = term;
   };
 
+  const setError = function(error) {
+    this.error=error;
+  };
+
   return {
     items: [],
     hideCheckedItems: false,
     searchTerm: '',
+    error: null,
+    
 
     addItem,
     findById,
@@ -61,6 +67,7 @@ const store = (function(){
     toggleCheckedFilter,
     setSearchTerm,
     setItemIsEditing,
+    setError
   };
   
 }());
