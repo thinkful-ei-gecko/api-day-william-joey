@@ -23,6 +23,7 @@ const api = (function(){
   };
 
   const updateItem = function(id, updateData) {
+    console.log(updateData);
     return fetch(`${BASE_URL}/items/${id}`, {
       method: 'PATCH',
       headers: {
