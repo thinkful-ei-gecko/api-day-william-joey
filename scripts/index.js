@@ -9,6 +9,12 @@ $(document).ready(function() {
 store.items.push(Item.create('apples'));
 
 
-api.createItem('pears');
+api.getItems()
+  .then(res => res.json())
+  .then(jsonRes=>{
+    jsonRes.forEach(item => store.addItem(item));
+    shoppingList.render();
+
+  });
   
   

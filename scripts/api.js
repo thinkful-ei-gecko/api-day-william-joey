@@ -3,34 +3,26 @@ const api = (function(){
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/joey';
 
   const getItems = function(){
-    fetch(`${BASE_URL}/items`)
-      .then(response => response.json())
-      .then(responseJson => console.log(responseJson));
-    return Promise.resolve('A successful response!');
+    return fetch(`${BASE_URL}/items`);
+    
   };
 
   /** 
    * @param {string} name is a shopping list item to be added
   */
   const createItem = function(name){
-    let newItem = JSON.stringify( {
-      name: name,
+    let newItem = JSON.stringify({
+      name,
     });
-    fetch(`${BASE_URL}/items`,{
+    return fetch(`${BASE_URL}/items`,{
       method: 'POST',
-      headers: new Headers({
+      headers: {
         'Content-Type': 'application/json'
-      }),
+      },
       body: newItem,
-    })
-    .then(response => response.json())
- .then((newItem) => {
-    return api.getItems();
-  })
-  .then(res => res.json())
-  .then((items) => {
-    console.log(items);
-  });
+    });
+
+  };
 
 
 

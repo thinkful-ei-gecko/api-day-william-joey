@@ -67,8 +67,13 @@ const shoppingList = (function(){
       event.preventDefault();
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
-      store.addItem(newItemName);
-      render();
+      api.createItem(newItemName)
+        .then(res => res.json())
+        .then(newItem => {
+          store.addItem(newItem);
+          render();
+        });
+      
     });
   }
   
@@ -144,7 +149,7 @@ const shoppingList = (function(){
 
   // This object contains the only exposed methods from this module:
   return {
-    render: render,
-    bindEventListeners: bindEventListeners,
+    render,
+    bindEventListeners,
   };
 }());
