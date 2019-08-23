@@ -89,13 +89,10 @@ const shoppingList = (function(){
       api.updateItem(id, {checked: true})
         .then(response => {
           if(response.ok){
-            store.findAndUpdate(id, {checked: true})
+            store.findAndUpdate(id, {checked: true});
             render();
           }
-
-        
         });
-      
     });
   }
   
@@ -105,9 +102,13 @@ const shoppingList = (function(){
       // get the index of the item in store.items
       const id = getItemIdFromElement(event.currentTarget);
       // delete the item
-      store.findAndDelete(id);
-      // render the updated shopping list
-      render();
+      api.deleteItem(id)
+        .then(response => {
+          if(response.ok) {
+            store.findAndDelete(id);
+            render();
+          }
+        });
     });
   }
   

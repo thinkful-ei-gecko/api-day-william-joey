@@ -33,8 +33,11 @@ const api = (function(){
     });
   };
 
- 
-
+  const deleteItem = function(id) {
+    return fetch(`${BASE_URL}/items/${id}`, {
+      method: 'DELETE'
+    });
+  };
 
 
 
@@ -42,8 +45,6 @@ const api = (function(){
     getItems,
     createItem,
     updateItem,
-   
+    deleteItem
   };
-
-
 }());
