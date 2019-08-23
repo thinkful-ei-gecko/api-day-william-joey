@@ -32,9 +32,7 @@ const api = (function(){
     });
   };
 
-  const findAndUpdate = function(id, newData) {
-    
-  }
+ 
 
 
 
@@ -43,7 +41,7 @@ const api = (function(){
     getItems,
     createItem,
     updateItem,
-    findAndUpdate
+   
   };
 
 

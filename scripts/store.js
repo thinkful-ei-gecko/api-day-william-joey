@@ -14,7 +14,6 @@ const store = (function(){
   const findAndUpdate = function(id, newData) {
     const item = this.items.find(item => item.id === id);
     Object.assign(item, newData);
-    return item; //May not need this
   };
   // const findAndToggleChecked = function(id) {
   //   const item = this.findById(id);
