@@ -4,7 +4,6 @@ const api = (function(){
 
   const getItems = function(){
     return fetch(`${BASE_URL}/items`);
-    
   };
 
   /** 
@@ -19,17 +18,32 @@ const api = (function(){
       headers: {
         'Content-Type': 'application/json'
       },
-      body: newItem,
+      body: newItem
     });
-
   };
 
+  const updateItem = function(id, updateData) {
+    return fetch(`${BASE_URL}/items/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updateData)
+    });
+  };
+
+  const findAndUpdate = function(id, newData) {
+    
+  }
 
 
 
-  return{
+
+  return {
     getItems,
     createItem,
+    updateItem,
+    findAndUpdate
   };
 
 
